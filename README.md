@@ -9,6 +9,9 @@
 [![Code Climate][climate-image]][climate-url]
 [![Downloads][downloads-image]][downloads-url]
 
+## It's a fork. Original repository:
+[Link](https://github.com/ferdikoomen/openapi-typescript-codegen)
+
 > Node.js library that generates Typescript clients based on the OpenAPI specification.
 
 ## Why?

@@ -1,101 +1,101 @@
 {
-    "name": "openapi-typescript-codegen-with-custom-client",
-    "version": "0.0.1",
-    "description": "Fork of library that generates Typescript clients based on the OpenAPI specification.",
-    "author": "Sundved",
-    "homepage": "https://github.com/Sundved/openapi-typescript-codegen",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Sundved/openapi-typescript-codegen.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Sundved/openapi-typescript-codegen/issues"
-    },
-    "license": "MIT",
-    "keywords": [
-        "openapi",
-        "swagger",
-        "codegen",
-        "generator",
-        "client",
-        "typescript",
-        "yaml",
-        "json",
-        "fetch",
-        "xhr",
-        "node"
-    ],
-    "maintainers": [
-        {
-            "name": "Sundved",
-            "email": "sundved@gmail.com"
-        }
-    ],
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "types/index.d.ts",
-    "bin": {
-        "openapi": "bin/index.js"
-    },
-    "files": [
-        "bin/index.js",
-        "dist/index.js",
-        "types/index.d.ts"
-    ],
-    "scripts": {
-        "clean": "rimraf ./dist ./test/generated ./test/e2e/generated ./samples/generated ./coverage ./node_modules/.cache",
-        "build": "rollup --config --environment NODE_ENV:development",
-        "build:watch": "rollup --config --environment NODE_ENV:development --watch",
-        "release": "rollup --config --environment NODE_ENV:production",
-        "run": "node ./test/index.js",
-        "test": "jest --selectProjects UNIT",
-        "test:update": "jest --selectProjects UNIT --updateSnapshot",
-        "test:watch": "jest --selectProjects UNIT --watch",
-        "test:coverage": "jest --selectProjects UNIT --coverage",
-        "test:e2e": "jest --selectProjects E2E --runInBand",
-        "eslint": "eslint \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\"",
-        "eslint:fix": "eslint \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --fix",
-        "prettier": "prettier \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --check",
-        "prettier:fix": "prettier \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --write",
-        "prepublish": "yarn run clean && yarn run release"
-    },
-    "dependencies": {
-        "camelcase": "^6.2.0",
-        "commander": "^6.2.0",
-        "handlebars": "^4.7.6",
-        "js-yaml": "^3.14.0",
-        "mkdirp": "^1.0.4",
-        "rimraf": "^3.0.2"
-    },
-    "devDependencies": {
-        "@babel/cli": "7.12.8",
-        "@babel/core": "7.12.9",
-        "@babel/preset-env": "7.12.1",
-        "@babel/preset-typescript": "7.12.7",
-        "@rollup/plugin-commonjs": "16.0.0",
-        "@rollup/plugin-node-resolve": "10.0.0",
-        "@types/express": "4.17.9",
-        "@types/jest": "26.0.15",
-        "@types/js-yaml": "3.12.5",
-        "@types/node": "14.14.10",
-        "@types/node-fetch": "2.5.7",
-        "@typescript-eslint/eslint-plugin": "4.8.1",
-        "@typescript-eslint/parser": "4.8.2",
-        "eslint": "7.14.0",
-        "eslint-config-prettier": "6.15.0",
-        "eslint-plugin-prettier": "3.1.4",
-        "eslint-plugin-simple-import-sort": "6.0.1",
-        "express": "4.17.1",
-        "form-data": "3.0.0",
-        "glob": "7.1.6",
-        "jest": "26.6.3",
-        "jest-cli": "26.6.3",
-        "node-fetch": "2.6.1",
-        "prettier": "2.2.1",
-        "puppeteer": "5.4.1",
-        "rollup": "2.34.0",
-        "rollup-plugin-terser": "7.0.2",
-        "rollup-plugin-typescript2": "0.29.0",
-        "typescript": "4.1.2"
-    }
+  "name": "@sundved/openapi-typescript-codegen",
+  "version": "0.0.1",
+  "description": "Fork of library that generates Typescript clients based on the OpenAPI specification.",
+  "author": "Sundved",
+  "homepage": "https://github.com/Sundved/openapi-typescript-codegen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sundved/openapi-typescript-codegen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sundved/openapi-typescript-codegen/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "openapi",
+    "swagger",
+    "codegen",
+    "generator",
+    "client",
+    "typescript",
+    "yaml",
+    "json",
+    "fetch",
+    "xhr",
+    "node"
+  ],
+  "maintainers": [
+    "Sundved <sundved@gmail.com>"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "types/index.d.ts",
+  "bin": {
+    "openapi": "bin/index.js"
+  },
+  "files": [
+    "bin/index.js",
+    "dist/index.js",
+    "types/index.d.ts"
+  ],
+  "scripts": {
+    "clean": "rimraf ./dist ./test/generated ./test/e2e/generated ./samples/generated ./coverage ./node_modules/.cache",
+    "build": "rollup --config --environment NODE_ENV:development",
+    "build:watch": "rollup --config --environment NODE_ENV:development --watch",
+    "release": "rollup --config --environment NODE_ENV:production",
+    "run": "node ./test/index.js",
+    "test": "jest --selectProjects UNIT",
+    "test:update": "jest --selectProjects UNIT --updateSnapshot",
+    "test:watch": "jest --selectProjects UNIT --watch",
+    "test:coverage": "jest --selectProjects UNIT --coverage",
+    "test:e2e": "jest --selectProjects E2E --runInBand",
+    "eslint": "eslint \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\"",
+    "eslint:fix": "eslint \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --fix",
+    "prettier": "prettier \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --check",
+    "prettier:fix": "prettier \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --write",
+    "prepublish": "yarn run clean && yarn run release"
+  },
+  "dependencies": {
+    "camelcase": "^6.2.0",
+    "commander": "^6.2.0",
+    "handlebars": "^4.7.6",
+    "js-yaml": "^3.14.0",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.12.8",
+    "@babel/core": "7.12.9",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-typescript": "7.12.7",
+    "@rollup/plugin-commonjs": "16.0.0",
+    "@rollup/plugin-node-resolve": "10.0.0",
+    "@types/express": "4.17.9",
+    "@types/jest": "26.0.15",
+    "@types/js-yaml": "3.12.5",
+    "@types/node": "14.14.10",
+    "@types/node-fetch": "2.5.7",
+    "@typescript-eslint/eslint-plugin": "4.8.1",
+    "@typescript-eslint/parser": "4.8.2",
+    "eslint": "7.14.0",
+    "eslint-config-prettier": "6.15.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-simple-import-sort": "6.0.1",
+    "express": "4.17.1",
+    "form-data": "3.0.0",
+    "glob": "7.1.6",
+    "jest": "26.6.3",
+    "jest-cli": "26.6.3",
+    "node-fetch": "2.6.1",
+    "prettier": "2.2.1",
+    "puppeteer": "5.4.1",
+    "rollup": "2.34.0",
+    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-typescript2": "0.29.0",
+    "typescript": "4.1.2"
+  },
+  "directories": {
+    "test": "test"
+  }
 }
