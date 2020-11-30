@@ -131,7 +131,7 @@ function getUrl(options: ApiRequestOptions): string {
     const url = \`\${OpenAPI.BASE}\${path}\`;
 
     if (options.query) {
-        return \`\${url}\${getQueryString(options.query)}\`;
+        return \`\${url}\${getQueryString({...options.query, ts: new Date().getTime()})}\`;
     }
     return url;
 }
@@ -283,6 +283,7 @@ export async function request(options: ApiRequestOptions): Promise<ApiResult> {
     catchErrors(options, result);
     return result;
 }
+
 
 "
 `;
@@ -2374,7 +2375,7 @@ function getUrl(options: ApiRequestOptions): string {
     const url = \`\${OpenAPI.BASE}\${path}\`;
 
     if (options.query) {
-        return \`\${url}\${getQueryString(options.query)}\`;
+        return \`\${url}\${getQueryString({...options.query, ts: new Date().getTime()})}\`;
     }
     return url;
 }
@@ -2526,6 +2527,7 @@ export async function request(options: ApiRequestOptions): Promise<ApiResult> {
     catchErrors(options, result);
     return result;
 }
+
 
 "
 `;

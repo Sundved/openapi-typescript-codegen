@@ -20,6 +20,8 @@ import functionIsString from '../templates/core/functions/isString.hbs';
 import functionIsStringWithValue from '../templates/core/functions/isStringWithValue.hbs';
 import functionIsSuccess from '../templates/core/functions/isSuccess.hbs';
 import functionResolve from '../templates/core/functions/resolve.hbs';
+import httpClientRequest from '../templates/core/httpClient/request.hbs';
+import httpClientSendRequest from '../templates/core/httpClient/sendRequest.hbs';
 import nodeGetHeaders from '../templates/core/node/getHeaders.hbs';
 import nodeGetRequestBody from '../templates/core/node/getRequestBody.hbs';
 import nodeGetResponseBody from '../templates/core/node/getResponseBody.hbs';
@@ -164,6 +166,10 @@ export function registerHandlebarTemplates(): Templates {
     Handlebars.registerPartial('xhr/getResponseHeader', Handlebars.template(xhrGetResponseHeader));
     Handlebars.registerPartial('xhr/sendRequest', Handlebars.template(xhrSendRequest));
     Handlebars.registerPartial('xhr/request', Handlebars.template(xhrRequest));
+
+    // Specific files for the httpClient client implementation
+    Handlebars.registerPartial('httpClient/sendRequest', Handlebars.template(httpClientSendRequest));
+    Handlebars.registerPartial('httpClient/request', Handlebars.template(httpClientRequest));
 
     // Specific files for the node client implementation
     Handlebars.registerPartial('node/getHeaders', Handlebars.template(nodeGetHeaders));

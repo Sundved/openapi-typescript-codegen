@@ -20,6 +20,7 @@
 - Supports JSON and YAML files for input
 - Supports generation through CLI, Node.js and NPX
 - Supports tsc and @babel/plugin-transform-typescript
+- Supports custom httpClients with methods GET, POST, PUT, DELETE
 
 
 ## Install
@@ -37,21 +38,23 @@ $ openapi --help
   Usage: openapi [options]
 
   Options:
-    -V, --version             output the version number
-    -i, --input <value>       OpenAPI specification, can be a path, url or string content (required)
-    -o, --output <value>      Output directory (required)
-    -c, --client <value>      HTTP client to generate [fetch, xhr, node] (default: "fetch")
-    --useOptions              Use options instead of arguments
-    --useUnionTypes           Use union types instead of enums
-    --exportCore <value>      Write core files to disk (default: true)
-    --exportServices <value>  Write services to disk (default: true)
-    --exportModels <value>    Write models to disk (default: true)
-    --exportSchemas <value>   Write schemas to disk (default: false)
+    -V, --version                   output the version number
+    -i, --input <value>             OpenAPI specification, can be a path, url or string content (required)
+    -o, --output <value>            Output directory (required)
+    -c, --client <value>            HTTP client to generate [fetch, xhr, node, httpClient] (default: "fetch")
+    --httpClientLibrary <value>     Library for httpClient with methods GET, POST, PUT, DELETE
+    --useOptions                    Use options instead of arguments
+    --useUnionTypes                 Use union types instead of enums
+    --exportCore <value>            Write core files to disk (default: true)
+    --exportServices <value>        Write services to disk (default: true)
+    --exportModels <value>          Write models to disk (default: true)
+    --exportSchemas <value>         Write schemas to disk (default: false)
 
   Examples
     $ openapi --input ./spec.json
     $ openapi --input ./spec.json --output ./dist
     $ openapi --input ./spec.json --output ./dist --client xhr
+    $ openapi --input ./spec.json --output ./dist --client httpClient --httpClientLibrary @myapp/XHR/HttpClient
 ```
 
 

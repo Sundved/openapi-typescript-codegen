@@ -1,0 +1,15 @@
+import {DELETE, GET, POST, PUT} from '{{>httpClientLibrary}}';
+
+async function sendRequest(options: ApiRequestOptions, url: string): Promise<any> {
+
+    switch (options.method) {
+        case 'GET':
+            return GET(url);
+        case 'POST':
+            return POST(url, getRequestBody(options));
+        case 'PUT':
+            return PUT(url, getRequestBody(options));
+        case 'DELETE':
+            return DELETE(url, getRequestBody(options));
+    }
+}

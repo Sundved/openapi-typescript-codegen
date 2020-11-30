@@ -23,6 +23,7 @@ import { writeClientServices } from './writeClientServices';
  * @param exportServices: Generate services
  * @param exportModels: Generate models
  * @param exportSchemas: Generate schemas
+ * @param httpClientLibrary: Library for httpClient
  */
 export async function writeClient(
     client: Client,
@@ -34,7 +35,8 @@ export async function writeClient(
     exportCore: boolean,
     exportServices: boolean,
     exportModels: boolean,
-    exportSchemas: boolean
+    exportSchemas: boolean,
+    httpClientLibrary: string
 ): Promise<void> {
     const outputPath = path.resolve(process.cwd(), output);
     const outputPathCore = path.resolve(outputPath, 'core');
@@ -55,7 +57,7 @@ export async function writeClient(
     if (exportServices) {
         await rmdir(outputPathServices);
         await mkdir(outputPathServices);
-        await writeClientServices(client.services, templates, outputPathServices, httpClient, useUnionTypes, useOptions);
+        await writeClientServices(client.services, templates, outputPathServices, httpClient, useUnionTypes, useOptions, httpClientLibrary);
     }
 
     if (exportSchemas) {

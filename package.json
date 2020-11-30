@@ -1,15 +1,15 @@
 {
-    "name": "openapi-typescript-codegen",
-    "version": "0.7.0",
-    "description": "Library that generates Typescript clients based on the OpenAPI specification.",
-    "author": "Ferdi Koomen",
-    "homepage": "https://github.com/ferdikoomen/openapi-typescript-codegen",
+    "name": "openapi-typescript-codegen-with-custom-client",
+    "version": "0.0.1",
+    "description": "Fork of library that generates Typescript clients based on the OpenAPI specification.",
+    "author": "Sundved",
+    "homepage": "https://github.com/Sundved/openapi-typescript-codegen",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ferdikoomen/openapi-typescript-codegen.git"
+        "url": "git+https://github.com/Sundved/openapi-typescript-codegen.git"
     },
     "bugs": {
-        "url": "https://github.com/ferdikoomen/openapi-typescript-codegen/issues"
+        "url": "https://github.com/Sundved/openapi-typescript-codegen/issues"
     },
     "license": "MIT",
     "keywords": [
@@ -27,8 +27,8 @@
     ],
     "maintainers": [
         {
-            "name": "Ferdi Koomen",
-            "email": "info@madebyferdi.com"
+            "name": "Sundved",
+            "email": "sundved@gmail.com"
         }
     ],
     "main": "dist/index.js",
@@ -57,8 +57,7 @@
         "eslint:fix": "eslint \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --fix",
         "prettier": "prettier \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --check",
         "prettier:fix": "prettier \"./src/**/*.ts\" \"./bin/index.js\" \"./types/index.d.ts\" --write",
-        "prepublish": "yarn run clean && yarn run release",
-        "codecov": "codecov --token=66c30c23-8954-4892-bef9-fbaed0a2e42b"
+        "prepublish": "yarn run clean && yarn run release"
     },
     "dependencies": {
         "camelcase": "^6.2.0",
@@ -82,7 +81,6 @@
         "@types/node-fetch": "2.5.7",
         "@typescript-eslint/eslint-plugin": "4.8.1",
         "@typescript-eslint/parser": "4.8.2",
-        "codecov": "3.8.1",
         "eslint": "7.14.0",
         "eslint-config-prettier": "6.15.0",
         "eslint-plugin-prettier": "3.1.4",

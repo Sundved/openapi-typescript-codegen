@@ -12,7 +12,8 @@ program
     .version(pkg.version)
     .requiredOption('-i, --input <value>', 'OpenAPI specification, can be a path, url or string content (required)')
     .requiredOption('-o, --output <value>', 'Output directory (required)')
-    .option('-c, --client <value>', 'HTTP client to generate [fetch, xhr, node]', 'fetch')
+    .option('-c, --client <value>', 'HTTP client to generate [fetch, xhr, node, httpClient]', 'fetch')
+    .option('--httpClientLibrary <value>', 'Library for httpClient with methods GET, POST, PUT, DELETE', '')
     .option('--useOptions', 'Use options instead of arguments')
     .option('--useUnionTypes', 'Use union types instead of enums')
     .option('--exportCore <value>', 'Write core files to disk', true)
@@ -28,6 +29,7 @@ if (OpenAPI) {
         input: program.input,
         output: program.output,
         httpClient: program.client,
+        httpClientLibrary: program.httpClientLibrary,
         useOptions: program.useOptions,
         useUnionTypes: program.useUnionTypes,
         exportCore: JSON.parse(program.exportCore) === true,

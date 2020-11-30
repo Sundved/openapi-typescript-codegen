@@ -1,0 +1,591 @@
+openapi: 3.0.1
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: "1.0"
+servers:
+  - url: //localhost:8080/
+tags:
+  - name: /credit/contract
+    description: Кредитные договоры
+paths:
+  /credit/contract/view:
+    post:
+      tags:
+        - /credit/contract
+      summary: Получение списка документов 'Информация о кредитных договорах' по заданным
+        фильтрам
+      operationId: getCreditContracts
+      requestBody:
+        description: Объект для параметров фильтрации документов 'Информация о кредитных
+          договорах'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditContractViewFilter'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditContractListResponse'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      deprecated: false
+      x-codegen-request-body-name: filter
+  /credit/contract/{id}:
+    get:
+      tags:
+        - /credit/contract
+      summary: Получение документа 'Информация о кредитных договорах' по ID для страницы
+        деталей документа и редактирования существующего
+      operationId: getCreditContractById
+      parameters:
+        - name: id
+          in: path
+          description: ID документа 'Информация о кредитных договорах'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedCreditContract'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      deprecated: false
+components:
+  schemas:
+    Amount:
+      title: Amount
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Сумма
+          example: 100.5
+        currencyCode:
+          type: string
+          description: Числовой код валюты
+          example: "643"
+        currencyDescription:
+          type: string
+          description: Описание валюты (РОССИЙСКИЙ РУБЛЬ, ДОЛЛАР США, ЕВРО)
+          example: РОССИЙСКИЙ РУБЛЬ
+        currencyName:
+          type: string
+          description: Буквенный ISO-код валюты(USD/EUR/RUB)
+          example: RUB
+      description: Сумма
+    Branch:
+      title: Branch
+      type: object
+      properties:
+        code:
+          type: string
+          description: Код отделения
+        name:
+          type: string
+          description: Наименование подразделения, в котором обслуживается клиент.
+      description: Подразделение банка
+    CreditContractListResponse:
+      title: CreditContractListResponse
+      type: object
+      properties:
+        items:
+          type: array
+          description: Коллекция элементов
+          items:
+            $ref: '#/components/schemas/CreditContractView'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Обертка для списка с постраничной разбивкой
+    CreditContractView:
+      title: CreditContractView
+      type: object
+      properties:
+        acceptSuspensiveCondition:
+          type: boolean
+          description: Признак выполнения отлагательных условий
+          example: true
+        accountNumber:
+          type: string
+          description: Основной расчетный счет по кредитному договору
+        availableAmount:
+          $ref: '#/components/schemas/Amount'
+        contractAmount:
+          $ref: '#/components/schemas/Amount'
+        contractName:
+          type: string
+          description: Наименование кредитного договора
+          example: 1948. Кредит 'Доверие'; ЮЛ/ИП. Аннуитет.
+        contractNumber:
+          type: string
+          description: Номер документа
+          example: "12345"
+        credProdCode:
+          type: string
+          description: Код кредитного продукта
+          example: "2216"
+        creditDate:
+          type: string
+          description: Дата начала действия договора (выдачи средств)
+          format: date-time
+        creditDurationDays:
+          type: integer
+          description: Срок действия кредита в днях
+          format: int32
+          example: 10
+        creditLineAvailableAmount:
+          $ref: '#/components/schemas/Amount'
+        creditLineFinishDate:
+          type: string
+          description: 'Кредитная линия: Дата окончания выборки'
+          format: date-time
+        creditSegment:
+          type: string
+          description: Сегмент
+          example: "2"
+        debtAmount:
+          $ref: '#/components/schemas/Amount'
+        delayPeriodDays:
+          type: integer
+          description: Количество дней просрочки по кредитному договору
+          format: int32
+          example: 10
+        docDate:
+          type: string
+          description: Дата заключения договора
+          format: date-time
+        docType:
+          type: string
+          description: Тип документа
+          example: CreditContract
+        earlyRepaymentEnable:
+          type: boolean
+          description: Признак доступного досрочного погашения
+          example: true
+        endDate:
+          type: string
+          description: Дата окончания действия договора
+          example: "20171011"
+        hasReservationPayroll:
+          type: boolean
+          description: Признак наличия у организации зарплатного договора с резервированием
+          example: true
+        interestRate:
+          type: number
+          description: Актуальная ставка по кредиту
+          example: 1.1
+        isClosed:
+          type: boolean
+          description: Признак закрытия
+          example: false
+        isCredit7Minutes:
+          type: boolean
+          description: Признак кредитного договора на кредит за 7 минут
+          example: false
+        isReglamentAllowed:
+          type: boolean
+          description: Признак разрешенного регламента для операции электронной выдачи
+          example: true
+        limitHistory:
+          type: array
+          description: График изменения лимита
+          items:
+            $ref: '#/components/schemas/LimitHistory'
+        monthlyPaymentDate:
+          type: string
+          description: Дата ежемесячного платежа
+          example: "20171011"
+        moratoriumDateEnd:
+          type: string
+          description: Дата окончания моратория
+          format: date-time
+        overdarftAvailableAmount:
+          $ref: '#/components/schemas/Amount'
+        overdraftLimitIndicator:
+          type: string
+          description: 'Овердрафт: индикатор изменения доступного лимита'
+          enum:
+            - REDUCED
+            - NOT_CHANGED
+            - INCREASED
+        productType:
+          type: string
+          description: Вид кредитного продукта
+          example: Кредит
+        restructAvailability:
+          type: string
+          description: Признак доступной реструктуризации по договору
+          example: YES
+          enum:
+            - YES
+            - NO
+            - STATE_AID
+        scheduledPaymentAmount:
+          $ref: '#/components/schemas/Amount'
+        scheduledPaymentDate:
+          type: string
+          description: Дата платежа (следующего)
+          format: date-time
+        updateDate:
+          type: string
+          description: Дата последнего обновления данных по кредитному контракту
+          format: date-time
+      description: Информация о кредитных договорах
+    CreditContractViewFilter:
+      title: CreditContractViewFilter
+      type: object
+      properties:
+        acceptSuspensiveCondition:
+          type: boolean
+          description: Признак выполнения отлагательных условий
+          example: true
+        dateFrom:
+          type: string
+          description: Дата начала
+          format: date-time
+        dateTo:
+          type: string
+          description: Дата окончания
+          format: date-time
+        isClosed:
+          type: boolean
+          description: Признак закрытия
+          example: false
+        isReglamentAllowed:
+          type: boolean
+          description: Признак разрешенного регламента для операции электронной выдачи
+          example: false
+        isTargetedCredit:
+          type: boolean
+          description: Признак целевого кредитования
+          example: false
+        number:
+          type: string
+          description: Номер документа
+          example: "1"
+        orderBy:
+          type: string
+          description: Сортировка
+          example: 'Формат: +fieldName или -fieldName'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        productTypes:
+          type: array
+          description: Список видов кредитных продуктов
+          example:
+            - кредитная линия
+            - овердрафт
+          items:
+            type: string
+        segments:
+          type: array
+          description: Список сегментов
+          example: {}
+          items:
+            type: string
+        statusCodes:
+          type: array
+          description: Список статусов
+          example: {}
+          items:
+            type: string
+      description: Фильтр для отбора документов 'Информация о кредитных договорах'
+    ExtendedCreditContract:
+      title: ExtendedCreditContract
+      type: object
+      properties:
+        acceptSuspensiveCondition:
+          type: boolean
+          description: Признак выполнения отлагательных условий
+          example: true
+        accountNumber:
+          type: string
+          description: Основной расчетный счет по кредитному договору
+        availableAmount:
+          $ref: '#/components/schemas/Amount'
+        branch:
+          $ref: '#/components/schemas/Branch'
+        contractAmount:
+          $ref: '#/components/schemas/Amount'
+        contractId:
+          type: string
+          description: Идентификатор кредитного договора в ЕКС
+          example: "4688069399315"
+        contractName:
+          type: string
+          description: Наименование кредитного договора
+          example: 1948. Кредит 'Доверие'; ЮЛ/ИП. Аннуитет.
+        contractNumber:
+          type: string
+          description: Номер кредитного договора в ЕКС
+          example: 031/9031/022-340
+        crConType:
+          type: string
+          description: Строковое описание типа кредита
+          example: 931 Корпоративное кредитование - возобновляемая кр линия с дифференцированными
+            ставками
+        credProdCode:
+          type: string
+          description: Код кредитного продукта
+          example: "1948"
+        creditDate:
+          type: string
+          description: Дата начала действия договора (выдачи средств)
+          format: date-time
+        creditDurationDays:
+          type: integer
+          description: Просрочка в днях
+          format: int32
+        creditDurationMonths:
+          type: integer
+          description: Просрочка в месяцах
+          format: int32
+        creditLineAvailableAmount:
+          $ref: '#/components/schemas/Amount'
+        creditLineFinishDate:
+          type: string
+          description: 'Кредитная линия: Дата окончания выборки'
+          format: date-time
+        creditSegment:
+          type: string
+          description: Сегмент
+          example: "2"
+        debtAmount:
+          $ref: '#/components/schemas/Amount'
+        debtorStatus:
+          type: string
+          description: Статус клиента
+          example: DEBTOR
+        delayPeriodDays:
+          type: integer
+          description: Количество дней просрочки по кредитному договору
+          format: int32
+          example: 7
+        docDate:
+          type: string
+          description: Дата заключения договора
+          format: date-time
+        docType:
+          type: string
+          description: Тип документа
+          example: CreditContract
+        earlyRepaymentEnable:
+          type: boolean
+          description: Признак доступного досрочного погашения
+          example: true
+        endDate:
+          type: string
+          description: Дата окончания действия договора
+          format: date-time
+        hasReservationPayroll:
+          type: boolean
+          description: Признак наличия у организации зарплатного договора с резервированием
+          example: true
+        interestRate:
+          type: number
+          description: Актуальная ставка по кредиту
+          example: 10.58
+        isClosed:
+          type: boolean
+          description: Признак закрытия
+          example: false
+        isCredit7Minutes:
+          type: boolean
+          description: Признак кредитного договора на кредит за 7 минут
+          example: false
+        isReglamentAllowed:
+          type: boolean
+          description: Признак разрешенного регламента для операции электронной выдачи
+          example: true
+        isVklds:
+          type: boolean
+          description: Признак типа кредита ВКЛДС (Возобновляемая кр линия с дифференцированными
+            ставками)
+          example: false
+        limitDate:
+          type: string
+          description: Дата окончания периода доступности лимитных средств
+          format: date-time
+        limitHistory:
+          type: array
+          description: График изменения лимита
+          items:
+            $ref: '#/components/schemas/LimitHistory'
+        maxTrancheDuration:
+          type: integer
+          description: Максимальный срок транша (число дней)
+          format: int32
+          example: 91
+        moratoriumDateEnd:
+          type: string
+          description: Дата окончания моратория
+          format: date-time
+        orgName:
+          type: string
+          description: Наименование организации получателя кредита
+          example: ИП17
+        orgTaxNumber:
+          type: string
+          description: ИНН организации получателя кредита
+          example: "4601234567"
+        overdarftAvailableAmount:
+          $ref: '#/components/schemas/Amount'
+        overdraftLimitIndicator:
+          type: string
+          description: 'Овердрафт: индикатор изменения доступного лимита'
+          enum:
+            - REDUCED
+            - NOT_CHANGED
+            - INCREASED
+        productType:
+          type: string
+          description: Вид кредитного продукта
+          example: кредитная линия
+        restructAvailability:
+          type: string
+          description: Признак доступной реструктуризации по договору
+          example: YES
+          enum:
+            - YES
+            - NO
+            - STATE_AID
+        restructRequestInfo:
+          $ref: '#/components/schemas/RestructRequestInfo'
+        scheduledPaymentAmount:
+          $ref: '#/components/schemas/Amount'
+        scheduledPaymentDate:
+          type: string
+          description: Дата следующего платежа
+          format: date-time
+        settlementAccounts:
+          type: array
+          description: Расчетные счета клиента для использования в рамках кредитного
+            договора
+          items:
+            type: string
+        trancheCount:
+          type: integer
+          description: Число траншей
+          format: int32
+          example: 10
+        updateDate:
+          type: string
+          description: Дата последнего обновления данных по кредитному контракту
+          format: date-time
+      description: Основная информация о кредитном договоре
+    LimitHistory:
+      title: LimitHistory
+      type: object
+      properties:
+        dateBegin:
+          type: string
+          description: Дата начала лимита
+          format: date-time
+        dateEnd:
+          type: string
+          description: Дата окончания лимита
+          format: date-time
+        period:
+          type: integer
+          description: Срок (в днях)
+          format: int32
+          example: 91
+        sum:
+          $ref: '#/components/schemas/Amount'
+      description: График изменения лимита
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Количество возвращаемых записей
+          format: int32
+        hasNextPage:
+          type: boolean
+          description: Признак наличия следующей страницы
+        offset:
+          type: integer
+          description: Смещение от начала
+          format: int32
+      description: Нумерация
+    RestructRequestInfo:
+      title: RestructRequestInfo
+      type: object
+      properties:
+        analysisType:
+          type: string
+          description: Вид анализа заявки
+          example: EXPRESS0
+          enum:
+            - EXPRESS0
+            - CF
+            - EXPRESS1
+            - EXPRESS2
+            - MANREPORT
+            - QUICKDECIS
+            - LEASINGFACT
+            - LEASINGFACTEXT
+            - CFRISKS
+            - R1D
+            - MFO
+            - KREDO
+            - CFSMART
+            - CCSMART
+            - CBC
+            - FACTORING
+            - RESTRUCT
+            - CCRESTRUCT
+            - CPFNS
+            - CPCustomWar
+        createDate:
+          type: string
+          description: Дата создания заявки
+          format: date-time
+        statusCode:
+          type: string
+          description: Статус
+          example: CREATED
+        technology:
+          type: string
+          description: Технология выбраного кредитного продукта
+          example: FACTORY
+          enum:
+            - FACTORY
+            - CONVEYOR
+            - QUICK
+            - LEASING
+            - CREDIT_1H
+            - FACTORING
+      description: Данные о заявке на реструктуризацию

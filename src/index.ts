@@ -11,6 +11,7 @@ export enum HttpClient {
     FETCH = 'fetch',
     XHR = 'xhr',
     NODE = 'node',
+    HTTP_CLIENT = 'httpClient',
 }
 
 export type Options = {
@@ -23,6 +24,7 @@ export type Options = {
     exportServices?: boolean;
     exportModels?: boolean;
     exportSchemas?: boolean;
+    httpClientLibrary?: string;
     write?: boolean;
 };
 
@@ -39,6 +41,7 @@ export type Options = {
  * @param exportServices: Generate services
  * @param exportModels: Generate models
  * @param exportSchemas: Generate schemas
+ * @param httpClientLibrary Library for httpClient
  * @param write Write the files to disk (true or false)
  */
 export async function generate({
@@ -51,6 +54,7 @@ export async function generate({
     exportServices = true,
     exportModels = true,
     exportSchemas = false,
+    httpClientLibrary = '',
     write = true,
 }: Options): Promise<void> {
     const openApi = isString(input) ? await getOpenApiSpec(input) : input;
@@ -62,7 +66,7 @@ export async function generate({
             const client = parseV2(openApi);
             const clientFinal = postProcessClient(client);
             if (!write) break;
-            await writeClient(clientFinal, templates, output, httpClient, useOptions, useUnionTypes, exportCore, exportServices, exportModels, exportSchemas);
+            await writeClient(clientFinal, templates, output, httpClient, useOptions, useUnionTypes, exportCore, exportServices, exportModels, exportSchemas, httpClientLibrary);
             break;
         }
 
@@ -70,7 +74,7 @@ export async function generate({
             const client = parseV3(openApi);
             const clientFinal = postProcessClient(client);
             if (!write) break;
-            await writeClient(clientFinal, templates, output, httpClient, useOptions, useUnionTypes, exportCore, exportServices, exportModels, exportSchemas);
+            await writeClient(clientFinal, templates, output, httpClient, useOptions, useUnionTypes, exportCore, exportServices, exportModels, exportSchemas, httpClientLibrary);
             break;
         }
     }
