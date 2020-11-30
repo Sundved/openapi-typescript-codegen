@@ -51,13 +51,13 @@ export async function writeClient(
     if (exportCore) {
         await rmdir(outputPathCore);
         await mkdir(outputPathCore);
-        await writeClientCore(client, templates, outputPathCore, httpClient);
+        await writeClientCore(client, templates, outputPathCore, httpClient, httpClientLibrary);
     }
 
     if (exportServices) {
         await rmdir(outputPathServices);
         await mkdir(outputPathServices);
-        await writeClientServices(client.services, templates, outputPathServices, httpClient, useUnionTypes, useOptions, httpClientLibrary);
+        await writeClientServices(client.services, templates, outputPathServices, httpClient, useUnionTypes, useOptions);
     }
 
     if (exportSchemas) {

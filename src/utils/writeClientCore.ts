@@ -11,10 +11,12 @@ import { Templates } from './registerHandlebarTemplates';
  * @param templates The loaded handlebar templates
  * @param outputPath Directory to write the generated files to
  * @param httpClient The selected httpClient (fetch, xhr or node)
+ * @param httpClientLibrary Library for httpClient
  */
-export async function writeClientCore(client: Client, templates: Templates, outputPath: string, httpClient: HttpClient): Promise<void> {
+export async function writeClientCore(client: Client, templates: Templates, outputPath: string, httpClient: HttpClient, httpClientLibrary: string): Promise<void> {
     const context = {
         httpClient,
+        httpClientLibrary,
         server: client.server,
         version: client.version,
     };
