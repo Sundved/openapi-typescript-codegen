@@ -1,13 +1,19 @@
 async function sendRequest(options: ApiRequestOptions, url: string): Promise<any> {
-
+    let body;
     switch (options.method) {
         case 'GET':
-            return GET(url);
+            body = await GET(url);
+            break;
         case 'POST':
-            return POST(url, getRequestBody(options));
+            body = await POST(url, getRequestBody(options));
+            break;
         case 'PUT':
-            return PUT(url, getRequestBody(options));
+            body = await PUT(url, getRequestBody(options));
+            break;
         case 'DELETE':
-            return DELETE(url, getRequestBody(options));
+            body = await DELETE(url, getRequestBody(options));
+            break;
     }
+
+    return {body};
 }

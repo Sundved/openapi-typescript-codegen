@@ -1,6 +1,6 @@
 {
   "name": "@sundved/openapi-typescript-codegen",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Fork of library that generates Typescript clients based on the OpenAPI specification.",
   "author": "Sundved",
   "homepage": "https://github.com/Sundved/openapi-typescript-codegen",
