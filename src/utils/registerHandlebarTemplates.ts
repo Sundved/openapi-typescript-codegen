@@ -20,6 +20,7 @@ import functionIsString from '../templates/core/functions/isString.hbs';
 import functionIsStringWithValue from '../templates/core/functions/isStringWithValue.hbs';
 import functionIsSuccess from '../templates/core/functions/isSuccess.hbs';
 import functionResolve from '../templates/core/functions/resolve.hbs';
+import httpClientGetRequestBody from '../templates/core/httpClient/getRequestBody.hbs';
 import httpClientRequest from '../templates/core/httpClient/request.hbs';
 import httpClientSendRequest from '../templates/core/httpClient/sendRequest.hbs';
 import nodeGetHeaders from '../templates/core/node/getHeaders.hbs';
@@ -168,6 +169,7 @@ export function registerHandlebarTemplates(): Templates {
     Handlebars.registerPartial('xhr/request', Handlebars.template(xhrRequest));
 
     // Specific files for the httpClient client implementation
+    Handlebars.registerPartial('httpClient/getRequestBody', Handlebars.template(httpClientGetRequestBody));
     Handlebars.registerPartial('httpClient/sendRequest', Handlebars.template(httpClientSendRequest));
     Handlebars.registerPartial('httpClient/request', Handlebars.template(httpClientRequest));
 
